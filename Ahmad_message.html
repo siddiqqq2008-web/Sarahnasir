@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmad Sahab ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+/* Root variables for easy color changes */
+:root {
+    --bg-color: #F5F5DC;   /* Beige */
+    --text-color: #800000; /* Maroon */
+    --heart-color: #FF0000;/* Red for hearts */
+}
+
+/* Reset and general styles */
+* { margin:0; padding:0; box-sizing:border-box; } 
+
+body {
+    font-family: 'Dancing Script', cursive; /* Cursive font */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-y: auto; 
+    scroll-behavior: smooth;
+    padding:20px;
+    position:relative;
+} 
+
+/* Floating Hearts */
+.heart {
+    position: absolute;
+    width:15px;
+    height:15px;
+    background:var(--heart-color);
+    transform:rotate(45deg);
+    border-radius:3px;
+    animation: float 10s ease-in-out infinite, rotateHeart 12s linear infinite;
+    opacity:0;
+    pointer-events:none;
+}
+.heart::before, .heart::after {
+    content:'';
+    position:absolute;
+    width:15px;
+height:15px;
+    background:var(--heart-color);
+    border-radius:50%;
+}
+.heart::before { top:-7px; left:0; }
+.heart::after { top:0; left:-7px; } 
+
+@keyframes float {
+    0% { transform: translateY(100vh) rotate(45deg); opacity:0; }
+    10% { opacity:1; }
+    100% { transform: translateY(-100vh) rotate(45deg); opacity:0; }
+}
+@keyframes rotateHeart { 0% { transform: rotate(0deg); } 50% { transform: rotate(180deg); } 100% { transform: rotate(360deg); } }
+
+/* Sparkles (updated for new background) */
+.sparkle {
+    position:fixed;
+    width:6px;
+    height:6px;
+    background:rgba(128,0,0,0.5); /* Maroon sparkles */
+    border-radius:50%;
+    box-shadow:0 0 12px rgba(128,0,0,0.5);
+    animation: sparkle 2s linear infinite, moveSparkle 5s linear infinite;
+    pointer-events:none;
+}
+@keyframes sparkle { 0%,100% { transform: scale(0.5); opacity:0.3; } 50% { transform: scale(1.2); opacity:1; } }
+@keyframes moveSparkle { 0% { transform: translate(0,0); } 50% { transform: translate(25px,-25px); } 100% { transform: translate(-15px,15px); } } 
+
+/* Message Box */
+#message {
+    font-size:30px; 
+    font-weight: bold; /* Bold cursive font */
+    color: var(--text-color);
+    line-height:1.8;
+    max-width:90%;
+    margin:0 auto;
+    padding:40px;
+    background: rgba(255,255,255,0.7); /* Lighter transparent background */
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1); 
+    backdrop-filter: blur(5px);
+    overflow-wrap: break-word;
+    position: relative;
+    z-index: 10;
+}
+#message p { margin-bottom:20px; }
+#message span {
+    display:block;
+    font-size:48px;
+    margin-top:20px;
+    font-weight:bold;
+    text-align:center;
+    animation: shimmer 3s ease-in-out infinite alternate;
+    color: var(--text-color); /* Maroon love you text */
+}
+@keyframes shimmer {
+    0% { text-shadow: 0 0 5px var(--text-color); }
+    50% { text-shadow: 0 0 20px var(--text-color); }
+    100% { text-shadow: 0 0 5px var(--text-color); }
+}
+</style>
+</head>
+<body> 
+
+<div id="message">
+<p>Hume bohot saari cheeze kehni hai aapse. Hum batana chahte hain ke hum aapse bohot pyar karte hain. Hum shak zaroor karte hain, par iska matlab yeh nahi ke hum aapse pyar nahi karte.</p> 
+
+<p>Aapke aane ke baad meri zindagi bohot achhi hogayi hai. Sab kuch bohot achha ho gaya hai aur hum khush rehne lage hain. Har din hume aapki yaad aati hai, aur wo pal yaad aata hai jab hum sath me ghar jaate the aur hum roz aapko dekhne ke liye school aate the. 😊</p> 
+
+<p>Aapke saath guzara hua har waqt mere liye sabse special hai. Aapke pyar ne meri zindagi ko itna khubsurat bana diya hai ke words me bayan karna mushkil hai. Ahmad Sahab, hum apse hamesha aise hi pyar karte rahenge aur aapke saath apna har din special banana chahte hain. Hum chaahte hain ke aap humesha khush rahen aur humari zindagi me ye pyar kabhi kam na ho or hamara nikah hojaye humlog hamesha sath rahen or khush rahen. ❤️</p> 
+
+<span>I love youhhhh ❤️</span>
+</div> 
+
+<!-- Background Music -->
+<audio id="romanticMusic" src="https://www.chosic.com/wp-content/uploads/2021/04/Alex-Productions-Romantic-Inspiration.mp3" loop autoplay></audio> 
+
+<script>
+// Music autoplay fallback
+const music = document.getElementById('romanticMusic');
+music.volume = 0.5;
+music.play().catch(() => {
+    document.body.addEventListener('click', function startMusic(){
+        music.play();
+        document.body.removeEventListener('click', startMusic);
+    });
+}); 
+
+// Floating Hearts
+function createHeart(){
+    const heart=document.createElement('div');
+    heart.className='heart';
+    heart.style.left=Math.random()*window.innerWidth+'px';
+    heart.style.top=window.innerHeight+'px';
+    let size=12+Math.random()*25;
+    heart.style.width=heart.style.height=size+'px';
+    heart.style.animationDuration=(4+Math.random()*6)+'s';
+    heart.style.animationDelay=(-Math.random()*4)+'s';
+    heart.style.opacity=Math.random();
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),10000);
+}
+setInterval(createHeart,100); // More frequent heart creation
+
+// Sparkles
+function createSparkle(){
+    const sparkle=document.createElement('div');
+    sparkle.className='sparkle';
+    sparkle.style.left=Math.random()*100+'vw';
+    sparkle.style.top=Math.random()*100+'vh';
+    sparkle.style.width=sparkle.style.height=(4+Math.random()*6)+'px';
+    sparkle.style.animationDelay=(-Math.random()*2)+'s';
+    document.body.appendChild(sparkle);
+    setTimeout(()=>sparkle.remove(),3500);
+}
+setInterval(createSparkle,400);
+</script>
+
+</body>
+</html>
